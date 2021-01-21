@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\MeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -26,6 +27,10 @@ Route::get('me', [MeController::class,'getMe']);
 // Routes for authenticated users only
 Route::middleware(['auth:api'])->group(function(){
     Route::post('logout',[LoginController::class, 'logout']);
+
+    Route::put('settings/profile', [SettingsController::class, 'updateProfile']);
+    Route::put('settings/password', [SettingsController::class, 'updatePassword']);
+
 
 });
 
