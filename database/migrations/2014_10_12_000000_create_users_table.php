@@ -15,10 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('tagline')->nullable();
+            $table->text('about')->nullable();
+            // Add a Point spatial data field named location
+            $table->point('location')->nullable();
+            $table->string('formatted_address')->nullable();
+            $table->boolean('available_to_hire')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
