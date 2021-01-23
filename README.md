@@ -9,3 +9,4 @@ Laravel "Have I Been Pwned?" Password Validation: https://github.com/ubient/lara
 Laravel MySQL Spatial extension to easily work with Spatial Data Types in MySQL: https://github.com/grimzy/laravel-mysql-spatial \
 Laravel Intervention Image for image manipulations: https://github.com/Intervention/image \
 Eloquent-Taggable Laravel library - easy add the ability to tag your Eloquent models in Laravel: https://github.com/cviebrock/eloquent-taggable \
+Amazon S3 Driver package for image uploading by PHPleague: https://github.com/thephpleague/flysystem-aws-s3-v3 \

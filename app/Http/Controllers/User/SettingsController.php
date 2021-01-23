@@ -50,7 +50,6 @@ class SettingsController extends Controller
     public function updatePassword(Request $request)
     {
      
-
         //current password
         $this->validate($request, [
             'current_password' => ['required', new MatchOldPassword],

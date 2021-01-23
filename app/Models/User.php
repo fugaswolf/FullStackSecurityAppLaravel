@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Notifications\VerifyEmail;
+use App\Notifications\ResetPassword;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\ResetPassword;
 
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
@@ -85,4 +85,16 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
+
+    
+    public function designs()
+    {
+        return $this->hasMany(Design::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
