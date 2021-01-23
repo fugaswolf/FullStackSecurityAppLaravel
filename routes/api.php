@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\MeController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\SettingsController;
@@ -25,6 +26,13 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Public routes
 Route::get('me', [MeController::class,'getMe']);
+
+// Get designs (public route)
+Route::get('designs', [DesignController::class,'index']);
+Route::get('designs/{id}', [DesignController::class,'findDesign']);
+
+// Get users (public route)
+Route::get('users', [UserController::class,'index']);
 
 // Routes for authenticated users only
 Route::middleware(['auth:api'])->group(function(){

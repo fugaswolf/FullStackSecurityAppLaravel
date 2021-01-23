@@ -7,11 +7,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
+use App\Repositories\Contracts\IUser;
 use App\Providers\RouteServiceProvider;
 //use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller
 {
+
+    protected $users;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('signed')->only('verify');
+        $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Email Verification Controller #CUSTOM CONTROLLER BY ALVI ISTAMALOV#
@@ -22,6 +38,7 @@ class VerificationController extends Controller
     | be re-sent if the user didn't receive the original email message.
     |
     */
+
 
     //verificatie email sturen naar de user's email
     public function verify(Request $request, User $user)
@@ -57,7 +74,7 @@ class VerificationController extends Controller
         ]);
         
     
-        $user = User::where('email', $request->email)->first();
+        $user = $this->users->findWhereFirst('email', $request->email);
         
         if(! $user){
             return response()->json(["errors" => [
@@ -75,19 +92,5 @@ class VerificationController extends Controller
 
         return response()->json(['status' => "Verification link resent"]);
 
-    }
-
-
-
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 }

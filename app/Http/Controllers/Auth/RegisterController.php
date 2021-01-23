@@ -15,6 +15,8 @@ use Ubient\PwnedPasswords\Rules\Pwned;
 
 class RegisterController extends Controller
 {
+
+    
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -30,6 +32,11 @@ class RegisterController extends Controller
 
 
     protected $users;
+    
+    public function __construct(IUser $users)
+    {
+        $this->users = $users;
+    }
 
     protected function registered(Request $request, User $user)
     {
@@ -66,7 +73,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //dd($data);
-        return User::create([
+        return $this->users->create([
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
