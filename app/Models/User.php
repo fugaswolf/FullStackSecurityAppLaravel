@@ -147,4 +147,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $chat;
     }
 
+    protected $appends=[
+        'photo_url'
+    ];
+
+    public function getPhotoUrlAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
+    }
+
 }

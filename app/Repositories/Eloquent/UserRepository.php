@@ -42,7 +42,7 @@ class UserRepository extends BaseRepository implements IUser
 
         if($lat && $lng){
             $point = new Point($lat, $lng);
-            $unit == 'km' ? $dist *= 1000 : $dist *=1609.34;
+            $unit == 'km' ? $dist *= 1000 : $dist *=1609.34; //miles to meters: 1mile = 1609,34 meters
             $query->distanceSphereExcludingSelf('location', $point, $dist);
         }
 
