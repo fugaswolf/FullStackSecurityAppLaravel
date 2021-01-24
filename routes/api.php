@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\MeController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\Teams\TeamsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\SettingsController;
@@ -96,7 +97,15 @@ Route::middleware(['auth:api'])->group(function(){
     Route::post('invitations/{id}/resend', [InvitationsController::class,'resend']);
     Route::post('invitations/{id}/respond', [InvitationsController::class,'respond']);
     Route::delete('invitations/{id}', [InvitationsController::class,'destroy']);
-     
+
+    
+     // Chats
+    Route::post('chats', [ChatController::class, 'sendMessage']);
+    Route::get('chats', [ChatController::class, 'getUserChats']);
+    Route::get('chats/{id}/messages', [ChatController::class, 'getChatMessages']);
+    Route::put('chats/{id}/markAsRead', [ChatController::class, 'markAsRead']);
+    Route::delete('messages/{id}', [ChatController::class, 'destroyMessage']);
+    
 
 
 });

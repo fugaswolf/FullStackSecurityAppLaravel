@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Models\Design;
 use App\Models\Comment;
+use App\Models\Message;
 use App\Models\Invitation;
 use App\Policies\TeamPolicy;
 use App\Policies\DesignPolicy;
@@ -26,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         Comment::class => CommentPolicy::class,
         Team::class => TeamPolicy::class,
         Invitation::class => InvitationPolicy::class,
+        Message::class => InvitationPolicy::class,
     ];
 
     /**
