@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
+use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentTaggable\Taggable;
@@ -9,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Design extends Model
 {
-    use HasFactory, Taggable;
+    use HasFactory, Taggable, Likeable;
     
     protected $fillable=[
         'user_id',
@@ -26,6 +28,7 @@ class Design extends Model
     protected $casts=[
         'is_live' => 'boolean',
         'upload_successful' => 'boolean',
+        'close_to_comments' => 'boolean'
     ];
 
 
@@ -33,6 +36,12 @@ class Design extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')
+                ->orderBy('created_at', 'asc');
     }
 
 

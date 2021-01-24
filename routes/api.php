@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\Designs\DesignController;
 use App\Http\Controllers\Designs\UploadController;
+use App\Http\Controllers\Designs\CommentController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -46,6 +47,15 @@ Route::middleware(['auth:api'])->group(function(){
     Route::post('designs', [UploadController::class, 'upload']);
     Route::put('designs/{id}', [DesignController::class, 'update']);
     Route::delete('designs/{id}', [DesignController::class, 'destroy']);
+
+    // Comments
+    Route::post('designs/{id}/comments', [CommentController::class, 'store']);
+    Route::put('comments/{id}', [CommentController::class, 'update']);
+    Route::delete('comments/{id}', [CommentController::class, 'destroy']);
+
+    // Likes and Unlikes
+    Route::post('designs/{id}/like', [DesignController::class,'like']);
+    Route::get('designs/{id}/liked', [DesignController::class,'checkIfUserHasLiked']);
 });
 
 
